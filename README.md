@@ -39,7 +39,7 @@ python
 
 In Python console:
 ```python
-import pybundlr
+from pybundlr import pybundlr
 address = "Ry2bDGfBIvYtvDPYnf0eg_ijH4A1EDKaaEEecyjbUQ4"
 bal = pybundlr.balance(address)
 print(f"bal: {bal}")

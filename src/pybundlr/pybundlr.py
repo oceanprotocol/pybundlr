@@ -6,7 +6,7 @@ import subprocess
 
 #from enforce_typing import enforce_types
 
-def balance(self, address) -> int:
+def balance(address) -> int:
     """Return balance of address, denominated in winston (arweave base unit)"""
     cmd = f"bundlr balance {address} -h https://node1.bundlr.network -c arweave"
     args = cmd.split()
@@ -21,7 +21,7 @@ def balance(self, address) -> int:
     
 
 #@enforce_types
-def upload(self, file_name: str, private_key: str) -> str:
+def upload(file_name: str, private_key: str) -> str:
     """Upload file. Returns url."""
     return "wip"
 
