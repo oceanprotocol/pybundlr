@@ -74,7 +74,10 @@ rm -rf dist
 python -m build
 
 #run twine to upload `dist` files
-python3 -m twine upload dist/*
+python -m twine upload dist/*
+
+# -when prompted, give username: __token__
+# -when prompted, given password: <pypi API token>
 ```
 
 Done! The updated package will be [at pypi](https://pypi.org/project/pybundlr/).
