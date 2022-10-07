@@ -1,7 +1,7 @@
 [build-system]
 requires = [
   "hatchling",
-  "enforce_typing"
+  "hatch-requirements-txt",
 ]
 build-backend = "hatchling.build"
 
@@ -19,6 +19,10 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: Unix",
 ]
+dynamic = ["dependencies"]
+
+[tool.hatch.metadata.hooks.requirements_txt]
+files = ["requirements.txt"]
 
 [project.urls]
 "Homepage" = "https://github.com/oceanprotocol/pybundlr"
