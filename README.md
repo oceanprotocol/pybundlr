@@ -3,41 +3,29 @@ Simple py driver for bundlr
 
 Constructed by wrapping [bundlr CLI](https://docs.bundlr.network/docs/client/cli).
 
-# Installation
-
-### Prerequisites
+## Prerequisites
 
 Ensure prerequisites:
 - Linux/MacOS
 - Python 3.8.5+
 - Bundlr CLI: `npm install -g @bundlr-network/client`
 
-### Install pybundlr
+## Install Pybundlr Library
 
 Open a new terminal and:
 
 ```console
-#create a virtual environment
+#Create & activate venv
 python -m venv venv
-
-#activate env
 source venv/bin/activate
-
-#avoid issues
-pip install wheel
 
 #main install
 pip install pybundlr
 ```
 
-## Example Usage
+## Using Pybundlr Library
 
-From terminal, start a Python console:
-```console
-python
-```
-
-In Python console:
+From terminal: `python`. Then, in Python console:
 ```python
 from pybundlr import pybundlr
 address = "Ry2bDGfBIvYtvDPYnf0eg_ijH4A1EDKaaEEecyjbUQ4"
@@ -45,14 +33,42 @@ bal = pybundlr.balance(address)
 print(f"bal: {bal}")
 ```
 
+## Developing pybundlr
 
-## Release Process
+This section is for those further improving the pybundlr library.
+
+### Installation
+
+In a new terminal:
+
+```console
+#clone the repo and enter into it
+git clone https://github.com/oceanprotocol/pybundlr
+cd pybundlr
+
+#Create & activate venv
+python -m venv venv
+source venv/bin/activate
+
+#Install modules in the environment
+pip install -r requirements.txt
+```
+
+### Usage
+
+From the same terminal: `python`. Then, in Python console:
+```python
+from src.pybundlr import pybundlr
+address = "Ry2bDGfBIvYtvDPYnf0eg_ijH4A1EDKaaEEecyjbUQ4"
+bal = pybundlr.balance(address)
+print(f"bal: {bal}")
+```
+
+### Release Process
 
 Find the current version number at [pypi](https://pypi.org/project/pybundlr/).
 
 Open `pyproject.toml` in an editor, and update the value in `"version" = x.y.z`.
-
-
 
 In terminal:
 
