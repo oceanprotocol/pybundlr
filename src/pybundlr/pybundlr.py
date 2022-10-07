@@ -1,6 +1,3 @@
-# This module wraps bundlr CLI, which in turn wraps Arweave.
-# https://docs.bundlr.network/docs/client/cli
-
 import re
 import subprocess
 
