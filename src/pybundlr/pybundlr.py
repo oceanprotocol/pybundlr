@@ -21,7 +21,7 @@ def balance(self, address) -> int:
     
 
 #@enforce_types
-def upload(self, file_name: str, from_wallet: Wallet) -> str:
+def upload(self, file_name: str, private_key: str) -> str:
     """Upload file. Returns url."""
     return "wip"
 

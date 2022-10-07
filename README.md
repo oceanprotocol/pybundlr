@@ -44,3 +44,33 @@ address = "Ry2bDGfBIvYtvDPYnf0eg_ijH4A1EDKaaEEecyjbUQ4"
 bal = pybundlr.balance(address)
 print(f"bal: {bal}")
 ```
+
+
+## Release Process
+
+Find the current version number at [pypi](https://pypi.org/project/pybundlr/).
+
+Open `pyproject.toml` in an editor, and update the value in `"version" = x.y.z`.
+
+In terminal:
+
+```console
+#go to root of directory
+cd ~/code/pybundlr
+
+#turn off virtual env't
+deactivate
+
+#ensure `dist/` folder is empty
+rm -rf dist
+
+#generate distribution archives: two new files in `dist`` 
+python -m build
+
+#run twine to upload all the appropriate archives under `dist`
+python3 -m twine upload dist/*
+```
+
+Done! The updated package will be [at pypi](https://pypi.org/project/pybundlr/).
+
+Notes: this section is based on [packaging.python.org tutorial](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
