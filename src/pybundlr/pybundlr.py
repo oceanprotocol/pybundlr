@@ -4,7 +4,7 @@
 import re
 import subprocess
 
-from enforce_typing import enforce_types
+#from enforce_typing import enforce_types
 
 def balance(self, address) -> int:
     """Return balance of address, denominated in winston (arweave base unit)"""
@@ -20,7 +20,7 @@ def balance(self, address) -> int:
     return bal
     
 
-@enforce_types
+#@enforce_types
 def upload(self, file_name: str, from_wallet: Wallet) -> str:
     """Upload file. Returns url."""
     return "wip"
