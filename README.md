@@ -3,9 +3,10 @@ Simple py driver for bundlr
 
 Constructed by wrapping [bundlr CLI](https://docs.bundlr.network/docs/client/cli).
 
+Pypi: [Main](https://pypi.org/project/pybundlr/), [test](https://test.pypi.org/project/pybundlr)
+
 ## Prerequisites
 
-Ensure prerequisites:
 - Linux/MacOS
 - Python 3.8.5+
 - Bundlr CLI: `npm install -g @bundlr-network/client`
@@ -88,8 +89,26 @@ rm -rf dist
 
 #generate distribution archives: create `dist` folder with two files 
 python -m build
+```
 
-#run twine to upload `dist` files
+OPTIONAL: test the library, via test.pypi.org. In terminal:
+```
+#run twine to upload `dist` files to *test* pypi
+python3 -m twine upload --repository testpypi dist/*
+```
+
+OPTIONAL cont'd: open a different terminal, and:
+```console
+python -m venv venv
+source venv/bin/activate
+pip install -i https://test.pypi.org/simple/ pybundlr==<x.y.z>
+
+#Then: go through "Using Pybundlr Library" section above
+```
+
+Once you're satisfied, we can distribute to main pypi. In terminal:
+```console
+#run twine to upload `dist` files *main* pypi
 python -m twine upload dist/*
 
 # -when prompted, give username: __token__
