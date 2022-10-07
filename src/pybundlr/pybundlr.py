@@ -4,6 +4,8 @@
 import re
 import subprocess
 
+from enforce_typing import enforce_types
+
 def balance(self, address) -> int:
     """Return balance of address, denominated in winston (arweave base unit)"""
     cmd = f"bundlr balance {address} -h https://node1.bundlr.network -c arweave"
