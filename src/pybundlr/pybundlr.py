@@ -4,8 +4,9 @@
 import re
 import subprocess
 
-#from enforce_typing import enforce_types
+from enforce_typing import enforce_types
 
+@enforce_types
 def balance(address) -> int:
     """Return balance of address, denominated in winston (arweave base unit)"""
     cmd = f"bundlr balance {address} -h https://node1.bundlr.network -c arweave"
@@ -18,9 +19,8 @@ def balance(address) -> int:
     bal_s = re.search(r'\d+', output_s).group() #grab first number
     bal = int(bal_s)
     return bal
-    
 
-#@enforce_types
+@enforce_types
 def upload(file_name: str, private_key: str) -> str:
     """Upload file. Returns url."""
     return "wip"

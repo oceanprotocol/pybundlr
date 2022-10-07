@@ -1,7 +1,7 @@
 [build-system]
 requires = [
   "hatchling",
-#  "enforce_typing"
+  "enforce_typing"
 ]
 build-backend = "hatchling.build"
 
