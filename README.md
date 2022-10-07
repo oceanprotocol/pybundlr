@@ -41,6 +41,6 @@ In Python console:
 ```python
 import pybundlr
 address = "Ry2bDGfBIvYtvDPYnf0eg_ijH4A1EDKaaEEecyjbUQ4"
-bal = bundlr.balance(address)
+bal = pybundlr.balance(address)
 print(f"bal: {bal}")
 ```
