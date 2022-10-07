@@ -52,11 +52,17 @@ Find the current version number at [pypi](https://pypi.org/project/pybundlr/).
 
 Open `pyproject.toml` in an editor, and update the value in `"version" = x.y.z`.
 
+
+
 In terminal:
 
 ```console
 #go to root of directory
 cd ~/code/pybundlr
+
+#ensure repo is up-to-date
+git commit -am "Release x.y.z"
+git push
 
 #turn off virtual env't
 deactivate
@@ -64,10 +70,10 @@ deactivate
 #ensure `dist/` folder is empty
 rm -rf dist
 
-#generate distribution archives: two new files in `dist`` 
+#generate distribution archives: create `dist` folder with two files 
 python -m build
 
-#run twine to upload all the appropriate archives under `dist`
+#run twine to upload `dist` files
 python3 -m twine upload dist/*
 ```
 
