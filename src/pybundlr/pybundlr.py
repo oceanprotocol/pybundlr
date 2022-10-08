@@ -3,11 +3,21 @@ import subprocess
 
 from enforce_typing import enforce_types
 
+NODE_URL = "https://node1.bundlr.network"
+
 @enforce_types
-def balance(address:str, currency:str = "arweave") -> int:
-    """Return balance of address, denominated in base unit (winston, wei, ..)"""
-    url = "https://node1.bundlr.network"
-    cmd = f"bundlr balance {address} -h {url} -c {currency}"
+def balance(address:str, currency:str) -> int:
+    """
+    Return balance of address
+    
+    Parameters:
+      address - balance of address for the given currency at bundlr node
+      currency - Eg "arweave" (AR), "ethereum" (ETH), "polygon" (MATIC)
+
+    Returns:
+      balance - amount held of the target currency, in base unit (winston, wei)
+    """
+    cmd = f"bundlr balance {address} -c {currency} -h {NODE_URL}"
     print(f"\nCOMMAND: {cmd}")
     args = cmd.split()
     completed_process = subprocess.run(args, capture_output=True, check=True)
@@ -20,10 +30,36 @@ def balance(address:str, currency:str = "arweave") -> int:
     return bal
 
 @enforce_types
-def upload(file_name: str, private_key: str) -> str:
-    """Upload file. Returns url."""
-    private_key = "/home/trentmc/Desktop/wallet.json" #HACK
-    cmd = f"bundlr upload {filename} -h https://node1.bundlr.network -w {private_key} -c arweave"
+def fund(amount:int, currency:str, private_key: str) -> str:
+    """
+    Fund a bundlr node. 
+
+    Parameters:
+      amount - how much to fund. In base units (winston, wei, ..)
+      currency - Eg "arweave" (AR), "ethereum" (ETH), "polygon" (MATIC)
+      private_key - private key, or path to json with arweave wallet
+    """
+    cmd = f"bundlr fund {amount} -c {currency} -h {NODE_URL} -w {private_key}"
+    print(f"\nCOMMAND: {cmd}")
+    import pdb; pdb.set_trace()
+    args = cmd.split()
+    completed_process = subprocess.run(args, capture_output=True, check=True)
+
+
+@enforce_types
+def upload(file_name:str, currency:str, private_key:str) -> str:
+    """
+    Upload file. 
+
+    Parameters:
+      file_name -- path to file
+      currency -- Eg "arweave" (AR), "ethereum" (ETH), "polygon" (MATIC)
+      private_key - private key, or path to json with arweave wallet
+
+    Returns:
+      url - location on arweave network where file is now stored
+    """
+    cmd = f"bundlr upload {filename} -c {currency} -h {NODE_URL} -w {private_key}"
     print(f"\nCOMMAND: {cmd}")
     args = cmd.split()
     completed_process = subprocess.run(args, capture_output=True, check=True)

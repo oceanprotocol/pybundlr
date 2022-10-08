@@ -15,6 +15,10 @@ def test_balance_ethereum():
 
 
 def test_upload(tmp_path):
+
+    private_key = "/home/trentmc/Desktop/wallet.json" #HACK
+
+    
     f = tmp_path / "myfile.txt"
     f.write_text("mycontent")
     url = pybundlr.upload(f.name, private_key)
