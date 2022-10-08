@@ -2,13 +2,17 @@ import re
 import subprocess
 
 from enforce_typing import enforce_types
+import web3
 
-NODE_URL = "https://node1.bundlr.network"
+BUNDLR_NODE_URL = "https://node1.bundlr.network"
+
+#picked arbitrarily from https://chainlist.org/chain/1
+ETH_NODE_URL = "https://eth-mainnet.nodereal.io/v1/1659dfb40aa24bbb8153a677b98064d7"
 
 @enforce_types
 def balance(address:str, currency:str) -> int:
     """
-    Return balance of address.
+    Gets the specified user's balance for the current Bundlr node
     
     Parameters:
       address - balance of address for the given currency at bundlr node
@@ -17,9 +21,9 @@ def balance(address:str, currency:str) -> int:
     Returns:
       balance - amount held of the target currency, in base unit (winston, wei)
     """
-    cmd = f"bundlr balance {address} -c {currency} -h {NODE_URL}"
+    cmd = f"bundlr balance {address} -c {currency} -h {BUNDLR_NODE_URL}"
     stdout = _run_cmd(cmd)
-    bal_s = re.search(r'\d+', stdout).group() #grab first number
+    bal_s = re.findall("\d+", stdout)[0]
     bal = int(bal_s)
     return bal
 
@@ -27,20 +31,47 @@ def balance(address:str, currency:str) -> int:
 @enforce_types
 def fund(amount:int, currency:str, private_key: str) -> str:
     """
-    Fund a bundlr node. 
+    Funds your account with the specified amount of atomic units
 
     Parameters:
       amount - how much to fund. In base units (winston, wei, ..)
       currency - Eg "arweave" (AR), "ethereum" (ETH), "polygon" (MATIC)
       private_key - private key, or path to json with arweave wallet
     """
-    cmd = f"bundlr fund {amount} -c {currency} -h {NODE_URL} -w {private_key}"
+    if currency == "ethereum":
+        addr = eth_address(private_key)
+        b = bal_on_ethereum(addr)
+        if b < amount:
+            raise ValueError(f"Can't fund {amount} wei: balance is {b}")
+
+    cmd = f"bundlr fund {amount} -c {currency} -h {BUNDLR_NODE_URL} " \
+        f"-w {private_key} --no-confirmation"
     stdout = _run_cmd(cmd)
+
+@enforce_types
+def price(num_bytes: int, currency:str) -> int:
+    """
+    Check how much of a specific currency is required for an upload of num_bytes
+
+    Parameters:
+      num_bytes -- how many bytes. E.g. via os.stat(file_name).st_size
+      currency -- Eg "arweave" (AR), "ethereum" (ETH), "polygon" (MATIC)
+
+    Returns:
+      amt - price to upload, in base unit (winston, wei)
+    """
+    cmd = f"bundlr price {num_bytes} -c {currency} -h {BUNDLR_NODE_URL} "
+    stdout = _run_cmd(cmd)
+
+    #e.g. stdout = "Price for 10 bytes in ethereum is 24294303017 wei ..."
+    amt_s = re.findall("\d+", stdout)[1]
+    amt = int(amt_s)
+    return amt
 
 @enforce_types
 def upload(file_name:str, currency:str, private_key:str) -> str:
     """
-    Upload file. 
+    Uploads a specified file
 
     Parameters:
       file_name -- path to file
@@ -50,12 +81,20 @@ def upload(file_name:str, currency:str, private_key:str) -> str:
     Returns:
       url - location on arweave network where file is now stored
     """
-    cmd = f"bundlr upload {filename} -c {currency} -h {NODE_URL} -w {private_key}"
+    cmd = f"bundlr upload {file_name} -c {currency} -h {BUNDLR_NODE_URL} " \
+        f"-w {private_key} --no-confirmation"
     stdout = _run_cmd(cmd)
 
+    #e.g. "Uploaded to https://arweave.net/PJVOHDHjYrTXQJQg9UlgfKxgV2dUspc"
+    url = stdout.split()[-1] 
+    return url
+
+
+#==========================================================================
+#helper method
 
 def _run_cmd(cmd:str):
-    print(f"\nCOMMAND: {cmd}")
+    print(f"\nRUN COMMAND: {cmd}")
     args = cmd.split()
     completed_process = subprocess.run(args, capture_output=True, check=True)
 
@@ -68,3 +107,29 @@ def _run_cmd(cmd:str):
     
     print(stdout)
     return stdout
+
+
+#==========================================================================
+#eth convenience functions
+
+def eth_address(eth_private_key:str) -> str:
+    account = web3.eth.Account.privateKeyToAccount(eth_private_key)
+    return account.address
+    
+def bal_on_ethereum(eth_address:str) -> int:
+    """
+    Returns ether balance on Ethereum mainnet
+    
+    Parameters:
+      eth_address - address on eth mainnet
+
+    Returns:
+      bal - ether balance, denominated in wei
+    """
+    bal = w3().eth.get_balance(eth_address)
+    return bal
+
+def w3():
+    """Return Web3 instance"""
+    Web3 = web3.Web3
+    return Web3(Web3.HTTPProvider(ETH_NODE_URL))

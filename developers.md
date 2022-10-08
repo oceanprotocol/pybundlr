@@ -20,6 +20,14 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### Set envvars
+
+Some tests need an Ethereum account holding >0 ETH. If you need, go create one and get some ETH.
+
+Then, from the terminal:
+```console
+export REMOTE_TEST_PRIVATE_KEY1=<your account private key>
+```
 
 ### Testing
 
