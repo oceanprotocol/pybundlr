@@ -18,19 +18,7 @@ def balance(address:str, currency:str) -> int:
       balance - amount held of the target currency, in base unit (winston, wei)
     """
     cmd = f"bundlr balance {address} -c {currency} -h {NODE_URL}"
-    print(f"\nCOMMAND: {cmd}")
-    args = cmd.split()
-    completed_process = subprocess.run(args, capture_output=True, check=True)
-
-    #e.g. 'Balance: 50699435393886 winston (50.699435393886 arweave)\n'
-    stdout = completed_process.stdout.decode("ascii")
-    stderr = completed_process.stderr.decode("ascii")
-
-    if "error" in stderr.lower() or stdout == "":
-        print(stderr)
-        raise ValueError(stderr)
-    
-    print(stdout)
+    stdout = _run_cmd(cmd)
     bal_s = re.search(r'\d+', stdout).group() #grab first number
     bal = int(bal_s)
     return bal
@@ -47,11 +35,7 @@ def fund(amount:int, currency:str, private_key: str) -> str:
       private_key - private key, or path to json with arweave wallet
     """
     cmd = f"bundlr fund {amount} -c {currency} -h {NODE_URL} -w {private_key}"
-    print(f"\nCOMMAND: {cmd}")
-    import pdb; pdb.set_trace()
-    args = cmd.split()
-    completed_process = subprocess.run(args, capture_output=True, check=True)
-
+    stdout = _run_cmd(cmd)
 
 @enforce_types
 def upload(file_name:str, currency:str, private_key:str) -> str:
@@ -67,6 +51,20 @@ def upload(file_name:str, currency:str, private_key:str) -> str:
       url - location on arweave network where file is now stored
     """
     cmd = f"bundlr upload {filename} -c {currency} -h {NODE_URL} -w {private_key}"
+    stdout = _run_cmd(cmd)
+
+
+def _run_cmd(cmd:str):
     print(f"\nCOMMAND: {cmd}")
     args = cmd.split()
     completed_process = subprocess.run(args, capture_output=True, check=True)
+
+    stdout = completed_process.stdout.decode("ascii")
+    stderr = completed_process.stderr.decode("ascii")
+
+    if "error" in stderr.lower() or stdout == "":
+        print(stderr)
+        raise ValueError(stderr)
+    
+    print(stdout)
+    return stdout
