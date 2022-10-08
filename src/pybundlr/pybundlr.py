@@ -20,8 +20,7 @@ def balance(address) -> int:
 @enforce_types
 def upload(file_name: str, private_key: str) -> str:
     """Upload file. Returns url."""
-    return "wip"
-
-    # cmd = "bundlr upload image.png -h https://node1.bundlr.network -w wallet.json -c arweave"
-    # args = cmd.split()
-    # completed_process = subprocess.run(args, capture_output=True, check=True)
+    private_key = "/home/trentmc/Desktop/wallet.json" #HACK
+    cmd = f"bundlr upload {filename} -h https://node1.bundlr.network -w {private_key} -c arweave"
+    args = cmd.split()
+    completed_process = subprocess.run(args, capture_output=True, check=True)
