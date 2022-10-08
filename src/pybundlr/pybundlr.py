@@ -8,7 +8,7 @@ NODE_URL = "https://node1.bundlr.network"
 @enforce_types
 def balance(address:str, currency:str) -> int:
     """
-    Return balance of address
+    Return balance of address.
     
     Parameters:
       address - balance of address for the given currency at bundlr node
@@ -23,11 +23,18 @@ def balance(address:str, currency:str) -> int:
     completed_process = subprocess.run(args, capture_output=True, check=True)
 
     #e.g. 'Balance: 50699435393886 winston (50.699435393886 arweave)\n'
-    output_s = completed_process.stdout.decode("ascii")
+    stdout = completed_process.stdout.decode("ascii")
+    stderr = completed_process.stderr.decode("ascii")
 
-    bal_s = re.search(r'\d+', output_s).group() #grab first number
+    if "error" in stderr.lower() or stdout == "":
+        print(stderr)
+        raise ValueError(stderr)
+    
+    print(stdout)
+    bal_s = re.search(r'\d+', stdout).group() #grab first number
     bal = int(bal_s)
     return bal
+
 
 @enforce_types
 def fund(amount:int, currency:str, private_key: str) -> str:
