@@ -130,8 +130,7 @@ def _run_cmd(cmd:str):
 #eth convenience functions
 
 def eth_address(eth_private_key:str) -> str:
-    account = web3.eth.Account.privateKeyToAccount(eth_private_key)
-    #FIXME: 'DeprecationWarning: privateKeyToAccount is deprecated in favor of from_key'
+    account = web3.eth.Account.from_key(eth_private_key)
     return account.address
 
 
