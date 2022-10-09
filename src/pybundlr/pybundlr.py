@@ -156,12 +156,12 @@ def w3():
 def usd_to_wei(amt_usd, eth_price_in_usd) -> int:
     """Convert USD to wei"""
     amt_eth = amt_usd / eth_price_in_usd
-    amt_wei = pybundlr.w3().toWei(amt_eth, "ether")
+    amt_wei = w3().toWei(amt_eth, "ether")
     return amt_wei
 
 
 def wei_to_usd(amt_wei:int, eth_price_in_usd) -> float:
     """Convert wei to usd"""
-    amt_eth = pybundlr.w3().fromWei(amt_wei, "ether")
+    amt_eth = w3().fromWei(amt_wei, "ether")
     amt_usd = amt_eth * eth_price_in_usd
     return amt_usd
