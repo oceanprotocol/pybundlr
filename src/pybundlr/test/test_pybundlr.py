@@ -53,9 +53,8 @@ def test_fund_and_withdraw():
     except ValueError as e_info:
         #let it pass if insufficient balance, otherwise error gets raised
         #why: the funding above doesn't seem to make it through (FIXME)
-        if "Insufficient Balance" in str(e_info):
-            break e
-        raise ValueError(e_info)
+        if not "Insufficient Balance" in str(e_info):
+            raise ValueError(e_info)
 
 
 def test_fund_fail_no_eth():
