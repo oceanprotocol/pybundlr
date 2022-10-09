@@ -8,6 +8,7 @@ BUNDLR_NODE_URL = "https://node1.bundlr.network"
 
 #picked arbitrarily from https://chainlist.org/chain/1
 ETH_NODE_URL = "https://eth-mainnet.nodereal.io/v1/1659dfb40aa24bbb8153a677b98064d7"
+MATIC_NODE_URL = "https://polygon-rpc.com/"
 
 @enforce_types
 def balance(address:str, currency:str) -> int:
@@ -152,16 +153,3 @@ def w3():
     Web3 = web3.Web3
     return Web3(Web3.HTTPProvider(ETH_NODE_URL))
 
-
-def usd_to_wei(amt_usd, eth_price_in_usd) -> int:
-    """Convert USD to wei"""
-    amt_eth = amt_usd / eth_price_in_usd
-    amt_wei = w3().toWei(amt_eth, "ether")
-    return amt_wei
-
-
-def wei_to_usd(amt_wei:int, eth_price_in_usd) -> float:
-    """Convert wei to usd"""
-    amt_eth = w3().fromWei(amt_wei, "ether")
-    amt_usd = amt_eth * eth_price_in_usd
-    return amt_usd
