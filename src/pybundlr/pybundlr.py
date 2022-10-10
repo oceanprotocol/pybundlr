@@ -9,7 +9,7 @@ BUNDLR_NODE_URL = "https://node1.bundlr.network"
 
 #picked arbitrarily from https://chainlist.org/chain/1
 ETH_NODE_URL = "https://eth-mainnet.nodereal.io/v1/1659dfb40aa24bbb8153a677b98064d7"
-POLYGON_NODE_URL = "https://polygon-rpc.com/"
+MATIC_NODE_URL = "https://polygon-rpc.com/"
 
 @enforce_types
 def balance(address:str, currency:str) -> int:
@@ -18,7 +18,7 @@ def balance(address:str, currency:str) -> int:
     
     Parameters:
       address - balance of address for the given currency at bundlr node
-      currency - Eg "arweave" (AR), "ethereum" (ETH), "polygon" (MATIC)
+      currency - Eg "arweave" (AR), "ethereum" (ETH), "matic" (MATIC)
 
     Returns:
       balance - amount held of the target currency, in base unit (winston, wei)
@@ -37,7 +37,7 @@ def fund(amount:int, currency:str, private_key: str) -> str:
 
     Parameters:
       amount - how much to fund. In base units (winston, wei, ..)
-      currency - Eg "arweave" (AR), "ethereum" (ETH), "polygon" (MATIC)
+      currency - Eg "arweave" (AR), "ethereum" (ETH), "matic" (MATIC)
       private_key - private key, or path to json with arweave wallet
     """
     if currency == "ethereum":
@@ -58,7 +58,7 @@ def withdraw(amount:int, currency:str, private_key: str) -> str:
 
     Parameters:
       amount - how much to withdraw. In base units (winston, wei, ..)
-      currency - Eg "arweave" (AR), "ethereum" (ETH), "polygon" (MATIC)
+      currency - Eg "arweave" (AR), "ethereum" (ETH), "matic" (MATIC)
       private_key - private key, or path to json with arweave wallet
     """
     cmd = f"bundlr withdraw {amount} -c {currency} -h {BUNDLR_NODE_URL} " \
@@ -73,7 +73,7 @@ def price(num_bytes: int, currency:str) -> int:
 
     Parameters:
       num_bytes -- how many bytes. E.g. via os.stat(file_name).st_size
-      currency -- Eg "arweave" (AR), "ethereum" (ETH), "polygon" (MATIC)
+      currency -- Eg "arweave" (AR), "ethereum" (ETH), "matic" (MATIC)
 
     Returns:
       amt - price to upload, in base unit (winston, wei)
@@ -94,7 +94,7 @@ def upload(file_name:str, currency:str, private_key:str) -> str:
 
     Parameters:
       file_name -- path to file
-      currency -- Eg "arweave" (AR), "ethereum" (ETH), "polygon" (MATIC)
+      currency -- Eg "arweave" (AR), "ethereum" (ETH), "matic" (MATIC)
       private_key - private key, or path to json with arweave wallet
 
     Returns:
@@ -149,9 +149,9 @@ def bal_on_ethereum(eth_address:str) -> int:
     return _w3_ethereum().eth.get_balance(eth_address)
 
 
-def bal_on_polygon(eth_address:str) -> int:
+def bal_on_matic(eth_address:str) -> int:
     """
-    Returns ether balance on Polygon
+    Returns ether balance on Matic
     
     Parameters:
       eth_address - address on eth mainnet
@@ -159,14 +159,14 @@ def bal_on_polygon(eth_address:str) -> int:
     Returns:
       bal - ether balance, denominated in wei
     """
-    return _w3_polygon().eth.get_balance(eth_address)
+    return _w3_matic().eth.get_balance(eth_address)
 
 def _w3_ethereum():
     """Returns - web3 object pointed to Ethereum mainnet"""
     return Web3(Web3.HTTPProvider(ETH_NODE_URL))
 
-def _w3_polygon():
-    """Returns - web3 object pointed to Polygon mainnet"""
-    return Web3(Web3.HTTPProvider(POLYGON_NODE_URL)) 
+def _w3_matic():
+    """Returns - web3 object pointed to Matic (Polygon) mainnet """
+    return Web3(Web3.HTTPProvider(MATIC_NODE_URL)) 
 
 
