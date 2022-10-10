@@ -106,6 +106,25 @@ def test_upload(tmp_path):
     assert content_in == content_out, content_out
 
 
+def test_fund_and_upload(tmp_path):
+    content_in = "mycontent"
+    f = tmp_path / "myfile.txt"
+    f.write_text(content_in)
+    file_name = str(f)
+
+    eth_private_key = os.getenv('REMOTE_TEST_PRIVATE_KEY1')
+    
+    pybundlr.fund_and_upload(file_name, "matic", eth_private_key)
+    
+    url = pybundlr.upload(file_name, "matic", eth_private_key)
+    assert "https://arweave.net/" in url, url
+
+    result = requests.get(url)
+    content_out = result.text
+
+    assert content_in == content_out, content_out
+
+
 def test_eth_address():
     eth_private_key = os.getenv('REMOTE_TEST_PRIVATE_KEY1')
     eth_address = pybundlr.eth_address(eth_private_key)

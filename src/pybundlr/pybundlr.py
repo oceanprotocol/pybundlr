@@ -1,3 +1,4 @@
+import os
 import re
 import subprocess
 
@@ -10,6 +11,10 @@ BUNDLR_NODE_URL = "https://node1.bundlr.network"
 #picked arbitrarily from https://chainlist.org/chain/1
 ETH_NODE_URL = "https://eth-mainnet.nodereal.io/v1/1659dfb40aa24bbb8153a677b98064d7"
 MATIC_NODE_URL = "https://polygon-rpc.com/"
+
+
+#==========================================================================
+#functions that are 1:1 with bundlr CLI
 
 @enforce_types
 def balance(address:str, currency:str) -> int:
@@ -106,6 +111,40 @@ def upload(file_name:str, currency:str, private_key:str) -> str:
 
     #e.g. "Uploaded to https://arweave.net/PJVOHDHjYrTXQJQg9UlgfKxgV2dUspc"
     url = stdout.split()[-1] 
+    return url
+
+#==========================================================================
+#functions that combine >1 CLI calls
+
+def fund_and_upload(file_name:str, currency:str, private_key:str) -> str:
+    """
+    Uploads a specified file. Funds first if needed.
+    For "ethereum" or "matic" only, for now.
+
+    Parameters:
+      file_name -- path to file
+      currency -- "ethereum" (ETH), "matic" (MATIC)
+      private_key - private key, or path to json with arweave wallet
+
+    Returns:
+      url - location on arweave network where file is now stored
+    """
+    #we don't yet have a convenient conversion from AR private key -> addr
+    assert currency in ["ethereum", "matic"], "only currently support evm"
+    
+    num_bytes = os.stat(file_name).st_size
+
+    p = price(num_bytes, currency)
+    
+    amt_wei = p * 2 # the 2x is for safety margin, since price fluctuates
+
+    addr = eth_address(private_key)
+    bal_wei = balance(addr, currency)
+    if bal_wei < amt_wei:
+        fund(amt_wei, currency, private_key)
+
+    url = upload(file_name, currency, private_key)
+
     return url
 
 
