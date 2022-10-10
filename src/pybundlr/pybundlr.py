@@ -3,12 +3,13 @@ import subprocess
 
 from enforce_typing import enforce_types
 import web3
+from web3 import Web3
 
 BUNDLR_NODE_URL = "https://node1.bundlr.network"
 
 #picked arbitrarily from https://chainlist.org/chain/1
 ETH_NODE_URL = "https://eth-mainnet.nodereal.io/v1/1659dfb40aa24bbb8153a677b98064d7"
-MATIC_NODE_URL = "https://polygon-rpc.com/"
+POLYGON_NODE_URL = "https://polygon-rpc.com/"
 
 @enforce_types
 def balance(address:str, currency:str) -> int:
@@ -145,11 +146,27 @@ def bal_on_ethereum(eth_address:str) -> int:
     Returns:
       bal - ether balance, denominated in wei
     """
-    bal = w3().eth.get_balance(eth_address)
-    return bal
+    return _w3_ethereum().eth.get_balance(eth_address)
 
-def w3():
-    """Return Web3 instance"""
-    Web3 = web3.Web3
+
+def bal_on_polygon(eth_address:str) -> int:
+    """
+    Returns ether balance on Polygon
+    
+    Parameters:
+      eth_address - address on eth mainnet
+
+    Returns:
+      bal - ether balance, denominated in wei
+    """
+    return _w3_polygon().eth.get_balance(eth_address)
+
+def _w3_ethereum():
+    """Returns - web3 object pointed to Ethereum mainnet"""
     return Web3(Web3.HTTPProvider(ETH_NODE_URL))
+
+def _w3_polygon():
+    """Returns - web3 object pointed to Polygon mainnet"""
+    return Web3(Web3.HTTPProvider(POLYGON_NODE_URL)) 
+
 

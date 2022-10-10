@@ -99,3 +99,19 @@ def test_upload(tmp_path):
 
     assert content_in == content_out, content_out
 
+def test_eth_address():
+    eth_private_key = os.getenv('REMOTE_TEST_PRIVATE_KEY1')
+    eth_address = pybundlr.eth_address(eth_private_key)
+    assert eth_address[:2] == "0x"
+    assert len(eth_address) == 42
+
+def test_bal_on_ethereum():
+    #address with known nonzero eth
+    eth_address = "0x7BA3d8551A6f2C70a5d47bb448BcF7EF69661822"
+    assert pybundlr.bal_on_ethereum(eth_address) > 0
+
+def test_bal_on_polygon():
+    #address with known nonzero eth
+    eth_address = "0x7BA3d8551A6f2C70a5d47bb448BcF7EF69661822"
+    assert pybundlr.bal_on_polygon(eth_address) > 0
+    
