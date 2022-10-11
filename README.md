@@ -32,7 +32,7 @@ In terminal, go into Python console: `python`
 
 In Python console:
 ```python
-from src.pybundlr import pybundlr
+from pybundlr import pybundlr
 eth_address = "0x7BA3d8551A6f2C70a5d47bb448BcF7EF69661822"
 bal = pybundlr.balance(eth_address, "matic")
 print(f"{eth_address[:4]}'s MATIC balance in bundlr node: {bal} wei")
