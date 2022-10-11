@@ -2,9 +2,9 @@
 Simple py driver for bundlr.
 
 - Constructed by wrapping [bundlr CLI](https://docs.bundlr.network/docs/client/cli).
-- Pypi: [Main](https://pypi.org/project/pybundlr/), [test](https://test.pypi.org/project/pybundlr)
-- GitHub: https://github.com/oceanprotocol/pybundlr
-
+- [Full API in pybundlr.py](https://github.com/oceanprotocol/pybundlr/blob/main/src/pybundlr/pybundlr.py)
+- [Pypi main](https://pypi.org/project/pybundlr/), [test](https://test.pypi.org/project/pybundlr)
+- [GitHub repo](https://github.com/oceanprotocol/pybundlr)
 
 ## Installation
 
@@ -28,7 +28,7 @@ pip3 install pybundlr
 
 First, a quick example that reads information from a bundlr node. In this case, a balance.
 
-In terminal, go into Python console: `python`.
+In terminal, go into Python console: `python`
 
 In Python console:
 ```python
@@ -49,7 +49,7 @@ In terminal, export the private key of your Polygon account:
 export TEST_PRIVATE_KEY1=<your private key>
 ```
 
-In terminal, go into Python console: `python`.
+In terminal, go into Python console: `python`
 
 In Python console:
 ```python
@@ -77,9 +77,7 @@ assert content_out == content_in
 
 This example was on Polygon mainnet, with `currency = "matic"`. Pybundlr also works on Ethereum mainnet (`"ethereum"`), Arweave (`"arweave"`), and more.
 
-[The code itself](https://github.com/oceanprotocol/pybundlr/blob/main/src/pybundlr/pybundlr.py) has the full interface and behavior.
-
 ## Development
 
-- [Developers flow](developers.md) - to further develop pybundlr
-- [Release process](release-process.md) - to do a new release of pybundlr
+- [Developers flow](https://github.com/oceanprotocol/pybundlr/blob/main/developers.md) - to further develop pybundlr
+- [Release process](https://github.com/oceanprotocol/pybundlr/blob/main/release-process.md) - to do a new release of pybundlr
