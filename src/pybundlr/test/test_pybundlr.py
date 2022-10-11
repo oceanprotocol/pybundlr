@@ -18,6 +18,7 @@ def test_balance_ethereum():
     bal = pybundlr.balance(eth_address, "ethereum") #not ETH
     assert bal >= 0
 
+
 def test_balance_matic():
     eth_address = "0x7BA3d8551A6f2C70a5d47bb448BcF7EF69661822"
     
