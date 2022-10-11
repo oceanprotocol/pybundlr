@@ -79,5 +79,5 @@ This example was on Polygon mainnet, with `currency = "matic"`. Pybundlr also wo
 
 ## Development
 
-- [Developers flow](https://github.com/oceanprotocol/pybundlr/blob/main/developers.md) - to further develop pybundlr
-- [Release process](https://github.com/oceanprotocol/pybundlr/blob/main/release-process.md) - to do a new release of pybundlr
+- [Developers flow](developers.md) - to further develop pybundlr
+- [Release process](release-process.md) - to do a new release of pybundlr
