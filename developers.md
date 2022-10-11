@@ -40,7 +40,7 @@ pytest
 
 From the same terminal: `python`. Then, in Python console:
 ```python
-from src.pybundlr import pybundlr
+import pybundlr
 
 # (from here on, do the same as in the main README)
 ```
