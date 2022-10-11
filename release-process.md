@@ -43,7 +43,7 @@ Then, open a _different_ terminal, and:
 ```console
 python -m venv venv
 source venv/bin/activate
-pip install -i https://test.pypi.org/simple/ pybundlr==<x.y.z>
+pip3 install -i https://test.pypi.org/simple/ pybundlr==<x.y.z>
 
 #Then: go through "Using Pybundlr Library" section above
 ```

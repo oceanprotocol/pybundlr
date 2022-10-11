@@ -17,7 +17,7 @@ python -m venv venv
 source venv/bin/activate
 
 #Install modules in the environment
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ### Set envvars
