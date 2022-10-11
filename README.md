@@ -78,7 +78,7 @@ assert content_out == content_in
 
 This example was on Polygon mainnet, with `currency = "matic"`. Pybundlr also works on Ethereum mainnet (`"ethereum"`), Arweave (`"arweave"`), and more.
 
-The full interface (and behavior) is at: https://github.com/oceanprotocol/pybundlr/blob/main/src/pybundlr/pybundlr.py
+[The code itself](https://github.com/oceanprotocol/pybundlr/blob/main/src/pybundlr/pybundlr.py) has the full interface and behavior.
 
 ## Development
 
