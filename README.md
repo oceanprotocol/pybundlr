@@ -1,17 +1,17 @@
 # pybundlr
-Simple py driver for bundlr
+Simple py driver for bundlr.
 
-Constructed by wrapping [bundlr CLI](https://docs.bundlr.network/docs/client/cli).
+- Constructed by wrapping [bundlr CLI](https://docs.bundlr.network/docs/client/cli).
+- Pypi: [Main](https://pypi.org/project/pybundlr/), [test](https://test.pypi.org/project/pybundlr)
+- GitHub: https://github.com/oceanprotocol/pybundlr
 
-Pypi: [Main](https://pypi.org/project/pybundlr/), [test](https://test.pypi.org/project/pybundlr)
 
-## Prerequisites
+## Installation
 
+Ensure prerequisites:
 - Linux/MacOS
 - Python 3.8.5+
 - Bundlr CLI: `npm install -g @bundlr-network/client`
-
-## Install Pybundlr Library
 
 Open a new terminal and:
 
