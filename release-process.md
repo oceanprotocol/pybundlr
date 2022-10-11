@@ -1,5 +1,7 @@
 
-### Release Process
+## Release Process
+
+### 1. Build distribution archive
 
 Find the current version number at [pypi](https://pypi.org/project/pybundlr/).
 
@@ -25,13 +27,19 @@ rm -rf dist
 python -m build
 ```
 
-OPTIONAL: test the library, via test.pypi.org. In terminal:
+
+### 2. Test the library, via test.pypi.org (optional)
+
+In terminal:
 ```
 #run twine to upload `dist` files to *test* pypi
 python3 -m twine upload --repository testpypi dist/*
+
+# -when prompted, give username: __token__
+# -when prompted, given password: <pypi API token>
 ```
 
-OPTIONAL cont'd: open a different terminal, and:
+Then, open a _different_ terminal, and:
 ```console
 python -m venv venv
 source venv/bin/activate
@@ -40,7 +48,11 @@ pip install -i https://test.pypi.org/simple/ pybundlr==<x.y.z>
 #Then: go through "Using Pybundlr Library" section above
 ```
 
-Once you're satisfied, we can distribute to main pypi. In terminal:
+If things don't work, loop through steps 1-2 until they do.
+
+### 3. Distribute to main pypi
+
+In terminal:
 ```console
 #run twine to upload `dist` files *main* pypi
 python -m twine upload dist/*
@@ -51,4 +63,6 @@ python -m twine upload dist/*
 
 Done! The updated package will be [at pypi](https://pypi.org/project/pybundlr/).
 
-Notes: this section is based on [packaging.python.org tutorial](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
+### Notes
+
+This readme is a distillation of the [packaging-projects tutorial](https://packaging.python.org/en/latest/tutorials/packaging-projects/) at python.org.
