@@ -38,9 +38,9 @@ pytest
 
 ### Usage
 
-From the same terminal: `python`. Then, in Python console:
-```python
-import pybundlr
+From the same terminal: `python`
 
-# (from here on, do the same as in the main README)
+Then, in Python console:
+```python
+# (do the same as in the main README)
 ```
