@@ -48,6 +48,8 @@ pip install -i https://test.pypi.org/simple/ pybundlr==<x.y.z>
 #Then: go through "Using Pybundlr Library" section above
 ```
 
+The updated test package will be [at test pypi](https://test.pypi.org/project/pybundlr/).
+
 If things don't work, loop through steps 1-2 until they do.
 
 ### 3. Distribute to main pypi
@@ -58,7 +60,7 @@ In terminal:
 python -m twine upload dist/*
 
 # -when prompted, give username: __token__
-# -when prompted, given password: <pypi API token>
+# -when prompted, given password: <*test* pypi API token>
 ```
 
 Done! The updated package will be [at pypi](https://pypi.org/project/pybundlr/).
