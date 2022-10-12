@@ -53,9 +53,9 @@ In terminal, go into Python console: `python`
 
 In Python console:
 ```python
-import pybundlr
 import os
 import requests
+from pybundlr import pybundlr
 
 eth_private_key = os.getenv('REMOTE_TEST_PRIVATE_KEY1')
 
@@ -69,7 +69,7 @@ with open(file_name, 'a') as f:
 url = pybundlr.fund_and_upload(file_name, "matic", eth_private_key)
 print(f"Uploaded file. It's online at: {url}")
 
-#retreive the result
+#retrieve the result
 result = requests.get(url)
 content_out = result.text
 assert content_out == content_in
