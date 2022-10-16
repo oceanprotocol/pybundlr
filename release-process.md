@@ -36,7 +36,7 @@ In terminal:
 python3 -m twine upload --repository testpypi dist/*
 
 # -when prompted, give username: __token__
-# -when prompted, given password: <pypi API token>
+# -when prompted, given password: <*test* pypi API token>
 ```
 
 Then, open a _different_ terminal, and:
@@ -60,7 +60,7 @@ In terminal:
 python -m twine upload dist/*
 
 # -when prompted, give username: __token__
-# -when prompted, given password: <*test* pypi API token>
+# -when prompted, given password: <pypi API token>
 ```
 
 Done! The updated package will be [at pypi](https://pypi.org/project/pybundlr/).
