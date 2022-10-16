@@ -30,7 +30,7 @@ def balance(address:str, currency:str) -> int:
     """
     cmd = f"bundlr balance {address} -c {currency} -h {BUNDLR_NODE_URL}"
     stdout = _run_cmd(cmd)
-    bal_s = re.findall("\d+", stdout)[0]
+    bal_s = re.findall(r"\d+", stdout)[0]
     bal = int(bal_s)
     return bal
 
@@ -87,7 +87,7 @@ def price(num_bytes: int, currency:str) -> int:
     stdout = _run_cmd(cmd)
 
     #e.g. stdout = "Price for 10 bytes in ethereum is 24294303017 wei ..."
-    amt_s = re.findall("\d+", stdout)[1]
+    amt_s = re.findall(r"\d+", stdout)[1]
     amt = int(amt_s)
     return amt
 
