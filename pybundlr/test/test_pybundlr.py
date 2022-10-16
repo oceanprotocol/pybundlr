@@ -5,7 +5,7 @@ import pytest
 import requests
 from web3 import Web3
 
-from src.pybundlr import pybundlr
+from pybundlr import pybundlr
 
 def test_balance_arweave():
     ar_address = "Ry2bDGfBIvYtvDPYnf0eg_ijH4A1EDKaaEEecyjbUQ4"
