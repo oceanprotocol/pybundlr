@@ -126,6 +126,15 @@ def test_fund_and_upload(tmp_path):
     assert content_in == content_out, content_out
 
 
+def test_use_0x_key(tmp_path):
+    eth_private_key = os.getenv('REMOTE_TEST_PRIVATE_KEY1')
+    if eth_private_key[:2] != "0x":
+        eth_private_key = "0x" + eth_private_key
+        
+    amt_wei = 3
+    pybundlr.fund(amt_wei, "matic", eth_private_key)
+
+
 def test_eth_address():
     eth_private_key = os.getenv('REMOTE_TEST_PRIVATE_KEY1')
     eth_address = pybundlr.eth_address(eth_private_key)

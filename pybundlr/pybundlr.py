@@ -153,7 +153,8 @@ def fund_and_upload(file_name:str, currency:str, private_key:str) -> str:
 
 def _run_cmd(cmd:str):
     print(f"\nRUN COMMAND: {cmd}")
-    args = cmd.split()
+    args = cmd.split(" ")
+    args = _remove_0x_in_key(args)
     completed_process = subprocess.run(args, capture_output=True, check=True)
 
     stdout = completed_process.stdout.decode("ascii")
@@ -166,6 +167,15 @@ def _run_cmd(cmd:str):
     print(stdout)
     return stdout
 
+def _remove_0x_in_key(args):
+    """For EVM private keys, ensure they don't have '0x' in front"""
+    for i, arg in enumerate(args):
+        if arg == "-c" and args[i+1] not in ["matic", "ethereum"]:
+            break
+        if arg == "-w" and args[i+1][:2] == "0x":
+            args[i+1] = args[i+1][2:]
+            break
+    return args
 
 #==========================================================================
 #eth convenience functions
