@@ -1,0 +1,4 @@
+javascript==1!1.0.0
+enforce-typing==1.0.0.post1
+pytest
+requests==2.28.1
