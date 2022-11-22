@@ -155,7 +155,15 @@ def _run_cmd(cmd:str):
     cmd = _remove_0x_in_key(cmd)
     print(f"\nRUN COMMAND: {_safe_print(cmd)}")
     args = cmd.split(" ")
-    completed_process = subprocess.run(args, capture_output=True, check=True, shell=True)
+
+    # only spawn an intermediate shell process if needed (eg in Windows)
+    try:
+        shell = False
+        completed_process = subprocess.run(args, capture_output=True, check=True, shell=shell)
+    except subprocess.CalledProcessError:
+        shell = True
+        completed_process = subprocess.run(args, capture_output=True, check=True, shell=shell)
+        
 
     stdout = completed_process.stdout.decode("ascii")
     stderr = completed_process.stderr.decode("ascii")
