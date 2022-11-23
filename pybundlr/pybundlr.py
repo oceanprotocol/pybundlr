@@ -160,7 +160,7 @@ def _run_cmd(cmd:str):
     try:
         shell = False
         completed_process = subprocess.run(args, capture_output=True, check=True, shell=shell)
-    except subprocess.CalledProcessError:
+    except FileNotFoundError:
         shell = True
         completed_process = subprocess.run(args, capture_output=True, check=True, shell=shell)
         
