@@ -27,32 +27,7 @@ rm -rf dist
 python -m build
 ```
 
-
-### 2. Test the library, via test.pypi.org (optional)
-
-In terminal:
-```console
-#run twine to upload `dist` files to *test* pypi
-python3 -m twine upload --repository testpypi dist/*
-
-# -when prompted, give username: __token__
-# -when prompted, given password: <*test* pypi API token>
-```
-
-Then, open a _different_ terminal, and:
-```console
-python -m venv venv
-source venv/bin/activate
-pip3 install -i https://test.pypi.org/simple/ pybundlr==<x.y.z>
-
-#Then: go through "Using Pybundlr Library" section above
-```
-
-The updated test package will be [at test pypi](https://test.pypi.org/project/pybundlr/).
-
-If things don't work, loop through steps 1-2 until they do.
-
-### 3. Distribute to main pypi
+### 2. Distribute to pypi
 
 In terminal:
 ```console
