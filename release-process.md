@@ -31,7 +31,7 @@ python -m build
 ### 2. Test the library, via test.pypi.org (optional)
 
 In terminal:
-```
+```console
 #run twine to upload `dist` files to *test* pypi
 python3 -m twine upload --repository testpypi dist/*
 
