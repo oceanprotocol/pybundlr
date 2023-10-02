@@ -1,3 +1,5 @@
+⚠ Note: as of Feb 2023, this library is not being maintained. If you encounter a bug, feel free to report it, but do not expect it to be fixed. And feel free to fork this repo and change it as you wish (including bug fixes).
+
 # pybundlr
 Simple py driver for bundlr.
 
