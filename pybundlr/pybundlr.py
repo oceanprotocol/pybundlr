@@ -200,7 +200,7 @@ def _safe_print(cmd: str) -> str:
 #eth convenience functions
 
 def eth_address(eth_private_key:str) -> str:
-    account = web3.eth.Account.from_key(eth_private_key)
+    account = web3.Account.from_key(eth_private_key)
     return account.address
 
 
