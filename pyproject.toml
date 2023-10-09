@@ -7,7 +7,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pybundlr"
-version = "0.1.11" 
+version = "0.1.12" 
 authors = [
   { name="Trent McConaghy", email="gtrent@gmail.com" },
 ]
